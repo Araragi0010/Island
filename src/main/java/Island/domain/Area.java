@@ -2,7 +2,7 @@ package Island.domain;
 
 public class Area {
 
-    public Location locations[][];
+    private final Location locations[][];
 
     public Area(int x, int y) {
 

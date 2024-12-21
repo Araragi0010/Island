@@ -12,4 +12,19 @@ public abstract class Animal {
 
     public abstract void reproduction();
 
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getMaxNumberOnOneCell() {
+        return maxNumberOnOneCell;
+    }
+
+    public int getMaxNumberOfCellsPassedPerMove() {
+        return maxNumberOfCellsPassedPerMove;
+    }
+
+    public double getWeightOfFoodForFullSaturation() {
+        return weightOfFoodForFullSaturation;
+    }
 }
