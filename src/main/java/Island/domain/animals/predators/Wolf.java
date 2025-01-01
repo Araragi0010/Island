@@ -2,7 +2,7 @@ package Island.domain.animals.predators;
 
 import Island.domain.animals.Animal;
 
-public class Wolf extends Animal implements Predator {
+public class Wolf extends Predator {
 
     public Wolf() {
     }

@@ -3,7 +3,7 @@ package Island.domain.animals.herbivores;
 import Island.domain.animals.Animal;
 import Island.domain.animals.predators.Predator;
 
-public class Duck extends Animal implements Herbivore, Predator {
+public class Duck extends Herbivore {
 
     public Duck() {
     }

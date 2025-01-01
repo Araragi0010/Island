@@ -1,4 +1,8 @@
 package Island.domain.animals.predators;
 
-public interface Predator {
+import Island.domain.animals.Animal;
+
+public abstract class Predator extends Animal {
+
+    public void eat() {}
 }

@@ -8,4 +8,19 @@ public abstract class Plant {
 
     }
 
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getMaxNumberOnOneCell() {
+        return maxNumberOnOneCell;
+    }
+
+    public void setMaxNumberOnOneCell(int maxNumberOnOneCell) {
+        this.maxNumberOnOneCell = maxNumberOnOneCell;
+    }
 }

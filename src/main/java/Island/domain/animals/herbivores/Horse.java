@@ -1,8 +1,6 @@
 package Island.domain.animals.herbivores;
 
-import Island.domain.animals.Animal;
-
-public class Horse extends Animal implements Herbivore{
+public class Horse extends Herbivore{
 
     public Horse() {
     }
