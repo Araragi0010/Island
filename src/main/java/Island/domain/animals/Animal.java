@@ -1,31 +1,50 @@
 package Island.domain.animals;
 
-import Island.domain.plants.Plant;
+import Island.domain.service.PropertyReader;
+import java.util.Map;
 
 public abstract class Animal {
     private double weight;
-    private int maxNumberOnOneCell;
-    private int maxNumberOfCellsPassedPerMove;
-    private double weightOfFoodForFullSaturation;
+    private final double maxNumberOnOneCell;
+    private final double maxNumberOfCellsPassedPerMove;
+    private final double weightOfFoodForFullSaturation;
     private double currentSaturation = 0.0;
+
+    public Animal(){
+        PropertyReader propertyReader = new PropertyReader();
+        Map<String, Double> animalCharacteristics = propertyReader.readProperty(createFileName());
+
+        this.weight = animalCharacteristics.get("weight");
+        this.maxNumberOnOneCell = animalCharacteristics.get("maxNumberOnOneCell");
+        this.maxNumberOfCellsPassedPerMove = animalCharacteristics.get("maxNumberOfCellsPassedPerMove");
+        this.weightOfFoodForFullSaturation = animalCharacteristics.get("weightOfFoodForFullSaturation");
+    }
+
+    public abstract void eat();
+
+    public void reproduction(){
+
+    }
 
     public void move(){
 
     }
 
-    public void reproduction(){
+    private String createFileName(){
+        Class clazz = this.getClass();
 
+        return clazz.getName();
     }
 
     public double getWeight() {
         return weight;
     }
 
-    public int getMaxNumberOnOneCell() {
+    public double getMaxNumberOnOneCell() {
         return maxNumberOnOneCell;
     }
 
-    public int getMaxNumberOfCellsPassedPerMove() {
+    public double getMaxNumberOfCellsPassedPerMove() {
         return maxNumberOfCellsPassedPerMove;
     }
 
@@ -39,18 +58,6 @@ public abstract class Animal {
 
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public void setMaxNumberOnOneCell(int maxNumberOnOneCell) {
-        this.maxNumberOnOneCell = maxNumberOnOneCell;
-    }
-
-    public void setMaxNumberOfCellsPassedPerMove(int maxNumberOfCellsPassedPerMove) {
-        this.maxNumberOfCellsPassedPerMove = maxNumberOfCellsPassedPerMove;
-    }
-
-    public void setWeightOfFoodForFullSaturation(double weightOfFoodForFullSaturation) {
-        this.weightOfFoodForFullSaturation = weightOfFoodForFullSaturation;
     }
 
     public void setCurrentSaturation(double currentSaturation) {
