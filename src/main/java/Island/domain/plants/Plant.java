@@ -1,8 +1,25 @@
 package Island.domain.plants;
 
+import Island.domain.service.PropertyReader;
+import java.util.Map;
+
 public abstract class Plant {
     private double weight;
-    private int maxNumberOnOneCell;
+    private double maxNumberOnOneCell;
+
+    public Plant(){
+        PropertyReader propertyReader = new PropertyReader();
+        Map<String, Double> plantCharacteristics = propertyReader.readProperty(createFileName());
+
+        this.weight = plantCharacteristics.get("weight");
+        this.maxNumberOnOneCell = plantCharacteristics.get("maxNumberOnOneCell");
+    }
+
+    private String createFileName(){
+        Class clazz = this.getClass();
+
+        return clazz.getName();
+    }
 
     public void grow(){
 
@@ -16,11 +33,11 @@ public abstract class Plant {
         this.weight = weight;
     }
 
-    public int getMaxNumberOnOneCell() {
+    public double getMaxNumberOnOneCell() {
         return maxNumberOnOneCell;
     }
 
-    public void setMaxNumberOnOneCell(int maxNumberOnOneCell) {
+    public void setMaxNumberOnOneCell(double maxNumberOnOneCell) {
         this.maxNumberOnOneCell = maxNumberOnOneCell;
     }
 }
