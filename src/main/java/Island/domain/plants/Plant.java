@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class Plant {
     private double weight;
-    private double maxNumberOnOneCell;
+    private final double maxNumberOnOneCell;
 
     public Plant(){
         PropertyReader propertyReader = new PropertyReader();
@@ -21,9 +21,7 @@ public abstract class Plant {
         return clazz.getName();
     }
 
-    public void grow(){
-
-    }
+    public abstract void grow();
 
     public double getWeight() {
         return weight;
@@ -35,9 +33,5 @@ public abstract class Plant {
 
     public double getMaxNumberOnOneCell() {
         return maxNumberOnOneCell;
-    }
-
-    public void setMaxNumberOnOneCell(double maxNumberOnOneCell) {
-        this.maxNumberOnOneCell = maxNumberOnOneCell;
     }
 }
