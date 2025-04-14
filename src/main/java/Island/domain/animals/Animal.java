@@ -20,8 +20,6 @@ public abstract class Animal {
         this.weightOfFoodForFullSaturation = animalCharacteristics.get("weightOfFoodForFullSaturation");
     }
 
-    public abstract void eat();
-
     public void reproduction(){
 
     }

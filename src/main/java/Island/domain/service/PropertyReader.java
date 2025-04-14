@@ -24,7 +24,4 @@ public class PropertyReader {
 
         return propertyNameToValue;
     }
-
-
-
 }

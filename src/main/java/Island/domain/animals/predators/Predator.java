@@ -2,7 +2,7 @@ package Island.domain.animals.predators;
 
 import Island.domain.animals.Animal;
 
-public abstract class Predator extends Animal {
+public interface Predator {
 
-    public void eat() {}
+    public void eat(Animal animal);
 }
