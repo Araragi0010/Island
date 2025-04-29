@@ -18,6 +18,9 @@ public class Location {
     private static final HashMap< Class<? extends Animal> , Integer> mapAnimals = new HashMap<>();
     private static final HashMap< Class<? extends Plant> , Integer> mapPlants = new HashMap<>();
 
+    private final int maxCoordinateY;
+    private final int maxCoordinateX;
+
     static {
         //Predators
         mapAnimals.put(Wolf.class, 30);
@@ -38,7 +41,9 @@ public class Location {
     HashMap<Class<? extends Animal>, ArrayList<Animal>> animals = new HashMap<>();
     HashMap<Class<? extends Plant>, ArrayList<Plant>> plants = new HashMap<>();
 
-    public Location(Coordinates coordinates) {
+    public Location(Coordinates coordinates, int maxCoordinateY, int maxCoordinateX) {
+        this.maxCoordinateY = maxCoordinateY;
+        this.maxCoordinateX = maxCoordinateX;
         this.coordinates = coordinates;
         fillLocation();
     }

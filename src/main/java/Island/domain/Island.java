@@ -7,15 +7,15 @@ public class Island {
     public Island(int y, int x) {
 
         locations = new Location[y][x];
-        fillIsland();
+        fillIsland(y,x);
 
     }
 
-    private void fillIsland() {
+    private void fillIsland(int maxY, int maxX) {
         for (int y = 0; y < locations.length; y++) {
             for (int x = 0; x < locations[y].length; x++) {
                 Coordinates coordinates = new Coordinates(y, x);
-                locations[y][x] = new Location(coordinates);
+                locations[y][x] = new Location(coordinates, maxY-1, maxX-1);
             }
         }
     }
