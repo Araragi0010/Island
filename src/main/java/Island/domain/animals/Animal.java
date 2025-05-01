@@ -1,6 +1,7 @@
 package Island.domain.animals;
 
 import Island.domain.Coordinates;
+import Island.domain.service.AnimalFactory;
 import Island.domain.service.Direction;
 import Island.domain.service.PropertyReader;
 import Island.domain.service.RandomDirection;
@@ -14,6 +15,7 @@ public abstract class Animal {
     private final double maxNumberOfCellsPassedPerMove;
     private final double weightOfFoodForFullSaturation;
     private double currentSaturation = 0.0;
+    private final double maxOffspring = 3.0;
 
     private final RandomDirection randomDirection = new RandomDirection();
 
@@ -27,8 +29,15 @@ public abstract class Animal {
         this.weightOfFoodForFullSaturation = animalCharacteristics.get("weightOfFoodForFullSaturation");
     }
 
-    public void reproduction(){
+    public Animal[] reproduction(Class<? extends Animal> clazz, AnimalFactory animalFactory){
+        int numberOfChildren = ThreadLocalRandom.current().nextInt(1, (int) maxOffspring);
+        Animal[] children = new Animal[numberOfChildren];
 
+        for(int i = 0; i < children.length; i++){
+            children[i] = animalFactory.create(clazz);
+        }
+
+        return children;
     }
 
     public Coordinates move(Coordinates currentCoordinates, int maxCoordinateY, int maxCoordinateX){

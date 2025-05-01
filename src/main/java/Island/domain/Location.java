@@ -10,6 +10,7 @@ import Island.domain.service.AnimalFactory;
 import Island.domain.service.PlantFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -17,9 +18,6 @@ public class Location {
 
     private static final HashMap< Class<? extends Animal> , Integer> mapAnimals = new HashMap<>();
     private static final HashMap< Class<? extends Plant> , Integer> mapPlants = new HashMap<>();
-
-    private final int maxCoordinateY;
-    private final int maxCoordinateX;
 
     static {
         //Predators
@@ -33,6 +31,8 @@ public class Location {
         mapPlants.put(Grass.class, 200);
     }
 
+    private final int maxCoordinateY;
+    private final int maxCoordinateX;
     private final Coordinates coordinates;
 
     private final AnimalFactory animalFactory = new AnimalFactory();
@@ -46,6 +46,21 @@ public class Location {
         this.maxCoordinateX = maxCoordinateX;
         this.coordinates = coordinates;
         fillLocation();
+    }
+
+    private void reproduction(){
+        for(Class<? extends Animal> animalKey : animals.keySet()){
+            ArrayList<Animal> animalsList = animals.get(animalKey);
+            int numberOfCouples = (int) Math.floor(animalsList.size() / 2);
+
+            if(numberOfCouples > 0){
+                for(int i = 0; i < numberOfCouples; i++){
+                    Collections.addAll(animalsList, animalsList.get(i).reproduction(animalKey, animalFactory));
+                }
+            }
+
+
+        }
     }
 
     private void fillLocation(){
