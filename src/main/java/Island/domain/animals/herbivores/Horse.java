@@ -19,10 +19,4 @@ public class Horse extends Animal implements Herbivore {
             }
         }
     }
-
-    public void move() {
-    }
-
-    public void reproduction() {
-    }
 }

@@ -8,11 +8,15 @@ import Island.domain.plants.Grass;
 import Island.domain.plants.Plant;
 import Island.domain.service.AnimalFactory;
 import Island.domain.service.PlantFactory;
+import Island.domain.service.PropertyReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Location {
 
@@ -22,9 +26,9 @@ public class Location {
     static {
         //Predators
         mapAnimals.put(Wolf.class, 30);
-        mapAnimals.put(Horse.class, 20);
 
         //Herbivores
+        mapAnimals.put(Horse.class, 20);
         mapAnimals.put(Duck.class, 200);
 
         //Plants
@@ -34,6 +38,8 @@ public class Location {
     private final int maxCoordinateY;
     private final int maxCoordinateX;
     private final Coordinates coordinates;
+
+    private final PropertyReader propertyReader = new PropertyReader();
 
     private final AnimalFactory animalFactory = new AnimalFactory();
     private final PlantFactory plantFactory = new PlantFactory();
@@ -48,6 +54,42 @@ public class Location {
         fillLocation();
     }
 
+    private void eat(){
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+
+        for(Class<? extends Animal> animalClass : animals.keySet()){
+            String fileName = animalClass.getName() + "Chances";
+            Map<String, Double> chancesToEat = propertyReader.readProperty(fileName);
+
+            List<Animal> animalList = animals.get(animalClass);
+
+            for (Animal animal : animalList) {
+                for(String name : chancesToEat.keySet()){
+                    double chanceFromProperty = chancesToEat.get(name);
+
+                    if(chanceFromProperty == 0.0){
+                        continue;
+                    }
+
+                    double chance = 100.0 - chanceFromProperty;
+
+                    //Calculate the random number that is less or equals than 100.
+                    // It shows whether you have a chance to eat an animal or a plant.
+                    double currentChance =random.nextDouble(0,100);
+
+                    if(currentChance >= chance){
+
+                    }
+
+
+
+                }
+            }
+
+
+        }
+    }
+
     private void reproduction(){
         for(Class<? extends Animal> animalKey : animals.keySet()){
             ArrayList<Animal> animalsList = animals.get(animalKey);
@@ -58,8 +100,6 @@ public class Location {
                     Collections.addAll(animalsList, animalsList.get(i).reproduction(animalKey, animalFactory));
                 }
             }
-
-
         }
     }
 
