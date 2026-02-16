@@ -58,14 +58,22 @@ public class Location {
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
         for(Class<? extends Animal> animalClass : animals.keySet()){
-            String fileName = animalClass.getName() + "Chances";
-            Map<String, Double> chancesToEat = propertyReader.readProperty(fileName);
 
             List<Animal> animalList = animals.get(animalClass);
 
+            String fileName = animalClass.getName() + "Chances";
+            Map<String, Double> chancesToEat = propertyReader.readProperty(fileName);
+
             for (Animal animal : animalList) {
-                for(String name : chancesToEat.keySet()){
-                    double chanceFromProperty = chancesToEat.get(name);
+                double currentSaturation = animal.getCurrentSaturation();
+
+                if(currentSaturation >= animal.getWeightOfFoodForFullSaturation()){
+                    animal.setCurrentSaturation(animal.getWeightOfFoodForFullSaturation());
+                    continue;
+                }
+
+                for(Class<? extends Animal> animalToEat: mapAnimals.keySet()){
+                    double chanceFromProperty = chancesToEat.get(animalToEat.getName());
 
                     if(chanceFromProperty == 0.0){
                         continue;
@@ -77,8 +85,11 @@ public class Location {
                     // It shows whether you have a chance to eat an animal or a plant.
                     double currentChance =random.nextDouble(0,100);
 
-                    if(currentChance >= chance){
+                    ArrayList<Animal> animalsToEatList = animals.get(animalToEat);
 
+                    if(currentChance >= chance && !animalsToEatList.isEmpty()){
+
+                        animalsToEatList.remove(animalsToEatList.size()-1);
                     }
 
 
