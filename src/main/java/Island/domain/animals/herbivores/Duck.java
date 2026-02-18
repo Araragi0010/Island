@@ -22,7 +22,6 @@ public class Duck extends Animal implements Herbivore, Predator {
         }
     }
 
-    @Override
     public void eat(Animal animal) {
     }
 

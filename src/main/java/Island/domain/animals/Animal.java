@@ -1,6 +1,7 @@
 package Island.domain.animals;
 
 import Island.domain.Coordinates;
+import Island.domain.plants.Plant;
 import Island.domain.service.AnimalFactory;
 import Island.domain.service.Direction;
 import Island.domain.service.PropertyReader;
@@ -144,4 +145,7 @@ public abstract class Animal {
     public void setCurrentSaturation(double currentSaturation) {
         this.currentSaturation = currentSaturation;
     }
+
+    public abstract void eat(Plant plant);
+    public abstract void eat(Animal animal);
 }

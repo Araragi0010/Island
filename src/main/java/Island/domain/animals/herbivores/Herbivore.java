@@ -5,5 +5,4 @@ import Island.domain.plants.Plant;
 
 public interface Herbivore {
 
-    public void eat(Plant plant);
 }
