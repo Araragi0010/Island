@@ -15,7 +15,7 @@ public class Island {
         for (int y = 0; y < locations.length; y++) {
             for (int x = 0; x < locations[y].length; x++) {
                 Coordinates coordinates = new Coordinates(y, x);
-                locations[y][x] = new Location(coordinates, maxY-1, maxX-1);
+                locations[y][x] = new Location(locations, coordinates, maxY-1, maxX-1);
             }
         }
     }

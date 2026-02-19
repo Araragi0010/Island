@@ -48,7 +48,9 @@ public abstract class Animal {
         int newY = currentY;
         int newX = currentX;
 
-        if(randomDirection.getDirection() == Direction.RIGHT){
+        Direction direction = randomDirection.getDirection();
+
+        if(direction == Direction.RIGHT){
             if(currentX == maxCoordinateX){
                 return currentCoordinates;
             }
@@ -63,7 +65,7 @@ public abstract class Animal {
                 newX = ThreadLocalRandom.current().nextInt(currentX+1, maxCoordinateX);
             }
 
-        } else if (randomDirection.getDirection() == Direction.LEFT){
+        } else if (direction == Direction.LEFT){
             if(currentX == 0){
                 return currentCoordinates;
             }
@@ -78,7 +80,7 @@ public abstract class Animal {
                 newX = ThreadLocalRandom.current().nextInt(0, currentX-1);
             }
 
-        } else if (randomDirection.getDirection() == Direction.UP){
+        } else if (direction == Direction.UP){
             if(currentY == 0){
                 return currentCoordinates;
             }
@@ -92,7 +94,7 @@ public abstract class Animal {
             if (newY < maxCoordinateY) {
                 newY = ThreadLocalRandom.current().nextInt(0, currentY-1);
             }
-        } else if (randomDirection.getDirection() == Direction.DOWN){
+        } else if (direction == Direction.DOWN){
             if(currentY == maxCoordinateY){
                 return currentCoordinates;
             }

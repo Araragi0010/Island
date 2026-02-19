@@ -38,19 +38,21 @@ public class Location {
     private final int maxCoordinateY;
     private final int maxCoordinateX;
     private final Coordinates coordinates;
+    private final Location[][] listOfAllLocations;
 
     private final PropertyReader propertyReader = new PropertyReader();
 
     private final AnimalFactory animalFactory = new AnimalFactory();
     private final PlantFactory plantFactory = new PlantFactory();
 
-    HashMap<Class<? extends Animal>, ArrayList<Animal>> animals = new HashMap<>();
-    HashMap<Class<? extends Plant>, ArrayList<Plant>> plants = new HashMap<>();
+    private HashMap<Class<? extends Animal>, ArrayList<Animal>> animals = new HashMap<>();
+    private HashMap<Class<? extends Plant>, ArrayList<Plant>> plants = new HashMap<>();
 
-    public Location(Coordinates coordinates, int maxCoordinateY, int maxCoordinateX) {
+    public Location(Location[][] listOfAllLocations, Coordinates coordinates, int maxCoordinateY, int maxCoordinateX) {
         this.maxCoordinateY = maxCoordinateY;
         this.maxCoordinateX = maxCoordinateX;
         this.coordinates = coordinates;
+        this.listOfAllLocations = listOfAllLocations;
         fillLocation();
     }
 
@@ -138,6 +140,28 @@ public class Location {
         }
     }
 
+    private void move(){
+        for(Class<? extends Animal> animalKey : animals.keySet()){
+            ArrayList<Animal> animalsList = animals.get(animalKey);
+
+            for(Animal animal : animalsList){
+                Coordinates newCoordinates = animal.move(coordinates, maxCoordinateY, maxCoordinateX);
+
+                if (coordinates.equals(newCoordinates)){
+                    continue;
+                }
+
+                ArrayList<Animal> listOfNewLocation = listOfAllLocations[newCoordinates.getY()][newCoordinates.getX()]
+                        .getMapAnimals().get(animalKey);
+
+                if(listOfNewLocation.size() < animal.getMaxNumberOnOneCell()){
+                    listOfNewLocation.add(animal);
+                    animalsList.remove(animal);
+                }
+            }
+        }
+    }
+
     private void fillLocation(){
         mapAnimals.forEach((aClass, value) -> processAnimal(aClass, randomNumber(value)));
         mapPlants.forEach((pClass, value) -> processPlant(pClass, randomNumber(value)));
@@ -167,7 +191,7 @@ public class Location {
         return new Random().nextInt(number);
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
+    public Coordinates getCoordinates() {return coordinates;}
+    public HashMap<Class<? extends Animal>, ArrayList<Animal>> getMapAnimals() {return animals;}
+    public HashMap<Class<? extends Plant>, ArrayList<Plant>> getMapPlants() {return plants;}
 }
