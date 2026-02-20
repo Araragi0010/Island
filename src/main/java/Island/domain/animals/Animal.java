@@ -7,6 +7,8 @@ import Island.domain.service.Direction;
 import Island.domain.service.PropertyReader;
 import Island.domain.service.RandomDirection;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -148,6 +150,6 @@ public abstract class Animal {
         this.currentSaturation = currentSaturation;
     }
 
-    public abstract void eat(Plant plant);
-    public abstract void eat(Animal animal);
+    public abstract void eat(HashMap<Class<? extends Plant>, ArrayList<Plant>> plantsMap, Map<String, Double> chancesToEat);
+    public abstract void eat(Map<String, Double> chancesToEat, HashMap<Class<? extends Animal>, ArrayList<Animal>> animalsMap);
 }

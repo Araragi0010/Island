@@ -74,55 +74,8 @@ public class Location {
                     continue;
                 }
 
-                for(Class<? extends Animal> animalToEat: mapAnimals.keySet()){
-                    double chanceFromProperty = chancesToEat.get(animalToEat.getName());
-
-                    if(currentSaturation >= animal.getWeightOfFoodForFullSaturation()){
-                        return;
-                    }
-
-                    if(chanceFromProperty == 0.0){
-                        continue;
-                    }
-
-                    double chance = 100.0 - chanceFromProperty;
-
-                    //Calculate the random number that is less or equals than 100.
-                    // It shows whether you have a chance to eat an animal or a plant.
-                    double currentChance =random.nextDouble(0,100);
-
-                    ArrayList<Animal> animalsToEatList = animals.get(animalToEat);
-
-                    if(currentChance >= chance && !animalsToEatList.isEmpty()){
-                        animal.eat(animalsToEatList.get(animalsToEatList.size()-1));
-                        animalsToEatList.remove(animalsToEatList.size()-1);
-                    }
-                }
-
-                for(Class<? extends Plant> plantToEat: mapPlants.keySet()){
-                    double chanceFromProperty = chancesToEat.get(plantToEat.getName());
-
-                    if(currentSaturation >= animal.getWeightOfFoodForFullSaturation()){
-                        return;
-                    }
-
-                    if(chanceFromProperty == 0.0){
-                        continue;
-                    }
-
-                    double chance = 100.0 - chanceFromProperty;
-
-                    //Calculate the random number that is less or equals than 100.
-                    // It shows whether you have a chance to eat an animal or a plant.
-                    double currentChance =random.nextDouble(0,100);
-
-                    ArrayList<Plant> plantsToEatList = plants.get(plantToEat);
-
-                    if(currentChance >= chance && !plantsToEatList.isEmpty()){
-                        animal.eat(plantsToEatList.get(plantsToEatList.size()-1));
-                        plantsToEatList.remove(plantsToEatList.size()-1);
-                    }
-                }
+                animal.eat(chancesToEat, animals);
+                animal.eat(plants, chancesToEat);
             }
         }
     }
