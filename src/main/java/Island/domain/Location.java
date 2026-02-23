@@ -115,6 +115,22 @@ public class Location {
         }
     }
 
+    private void plantGrowth(){
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+
+        for(Class<? extends Plant> plantKey : mapPlants.keySet()){
+            ArrayList<Plant> plantsList = plants.get(plantKey);
+
+            int newNumberOfPlants = random.nextInt(plantsList.size(), mapPlants.get(plantKey));
+
+            if(newNumberOfPlants > plantsList.size()){
+                for(int i = 0; i < newNumberOfPlants; i++){
+                    plantsList.add(plantFactory.create(plantKey));
+                }
+            }
+        }
+    }
+
     private void fillLocation(){
         mapAnimals.forEach((aClass, value) -> processAnimal(aClass, randomNumber(value)));
         mapPlants.forEach((pClass, value) -> processPlant(pClass, randomNumber(value)));
