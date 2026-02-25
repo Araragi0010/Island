@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Horse extends Animal implements Herbivore {
+public class Caterpillar extends Animal implements Herbivore {
 
-    public Horse() {}
+    public Caterpillar() {}
 
     //Eat plant
     public void eat(HashMap<Class<? extends Plant>, ArrayList<Plant>> plantsMap, Map<String, Double> chancesToEat) {

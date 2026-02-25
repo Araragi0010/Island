@@ -131,6 +131,25 @@ public class Location {
         }
     }
 
+    public void daysCycle(){
+        this.plantGrowth();
+        this.eat();
+        this.reproduction();
+        this.move();
+    }
+
+    public void showStatistics(int day){
+        System.out.println("Day: " + day);
+
+        for(Class<? extends Plant> plantKey : mapPlants.keySet()){
+            System.out.println(plantKey.getName() + " -- " + plants.get(plantKey).size());
+        }
+
+        for(Class<? extends Animal> animalKey : mapAnimals.keySet()){
+            System.out.println(animalKey.getName() + " -- " + animals.get(animalKey).size());
+        }
+    }
+
     private void fillLocation(){
         mapAnimals.forEach((aClass, value) -> processAnimal(aClass, randomNumber(value)));
         mapPlants.forEach((pClass, value) -> processPlant(pClass, randomNumber(value)));

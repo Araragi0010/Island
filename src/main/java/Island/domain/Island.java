@@ -19,4 +19,17 @@ public class Island {
             }
         }
     }
+
+    public void daysCycle(){
+        int day = 1;
+        while(day > 11){
+            for(int y = 0; y < locations.length; y++){
+                for(int x = 0; x < locations[y].length; x++){
+                    locations[y][x].daysCycle();
+                    locations[y][x].showStatistics(day);
+                }
+            }
+            day++;
+        }
+    }
 }
