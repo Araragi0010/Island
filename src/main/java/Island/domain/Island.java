@@ -1,0 +1,35 @@
+package Island.domain;
+
+public class Island {
+
+    private final Location[][] locations;
+
+    public Island(int y, int x) {
+
+        locations = new Location[y][x];
+        fillIsland(y,x);
+
+    }
+
+    private void fillIsland(int maxY, int maxX) {
+        for (int y = 0; y < locations.length; y++) {
+            for (int x = 0; x < locations[y].length; x++) {
+                Coordinates coordinates = new Coordinates(y, x);
+                locations[y][x] = new Location(locations, coordinates, maxY-1, maxX-1);
+            }
+        }
+    }
+
+    public void daysCycle(){
+        int day = 1;
+        while(day > 11){
+            for(int y = 0; y < locations.length; y++){
+                for(int x = 0; x < locations[y].length; x++){
+                    locations[y][x].daysCycle();
+                    locations[y][x].showStatistics(day);
+                }
+            }
+            day++;
+        }
+    }
+}
